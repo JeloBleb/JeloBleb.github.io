@@ -92,3 +92,5 @@ section > h2 {
 .project ul.links-list { padding-left: 20px; }
 
 footer { padding: 32px 0 64px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+
+.gallery img { aspect-ratio: 1 / 1; object-fit: cover; width: 100%; }
