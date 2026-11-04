@@ -22,91 +22,171 @@
   <h2>How it works</h2>
   <div class="gallery">
     <figure class="hero pipeline-wrap">
-      <svg class="pipeline" viewBox="0 0 760 880" role="img" aria-labelledby="pl-title pl-desc" xmlns="http://www.w3.org/2000/svg">
+      <svg class="pipeline" viewBox="0 0 760 905" role="img" aria-labelledby="pl-title pl-desc" xmlns="http://www.w3.org/2000/svg">
         <title id="pl-title">How bebop turns a PDF into data</title>
-        <desc id="pl-desc">A PDF goes through ingest, propose and cover. Then prose is copied straight from the PDF's text, while each table is read by a vision model and every cell is checked against the words on the page. Numbers that don't match get one re-read; anything still unmatched is flagged and left empty; a failed read falls back to prose. Compose joins tables across pages, and emit writes the four outputs plus flags.</desc>
+        <desc id="pl-desc">A PDF goes through ingest, propose and cover. Then prose is copied straight from the PDF's text, while each table is read by a vision model and every cell is checked against the words on the page. A number that doesn't match gets one re-read; a number still unmatched is flagged and left empty; a failed read falls back to prose. Compose joins tables across pages, and emit writes tables.json, doc.json, images.json and markdown, plus a flag for everything that didn't verify.</desc>
         <defs>
-          <marker id="pl-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m" d="M0,0 L10,5 L0,10 z"/></marker>
-          <marker id="pl-arr-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m table" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="pl-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="pl-arr-t" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m table" d="M0,0 L10,5 L0,10 z"/></marker>
         </defs>
       
-        <!-- PDF -->
-        <rect class="box pill" x="320" y="16" width="120" height="36" rx="18"/>
-        <text class="t" x="380" y="39" text-anchor="middle">PDF</text>
-        <path class="a" d="M380,52 V78" marker-end="url(#pl-arr)"/>
+        <!-- input -->
+        <rect class="chip strong" x="310" y="12" width="140" height="36" rx="18"/>
+        <text class="t" x="380" y="35" text-anchor="middle">PDF in</text>
+        <path class="a" d="M380,48 V70" marker-end="url(#pl-arr)"/>
       
-        <!-- ingest -->
-        <rect class="box" x="200" y="80" width="360" height="56" rx="8"/>
-        <text class="t" x="380" y="103" text-anchor="middle">ingest</text>
-        <text class="s" x="380" y="123" text-anchor="middle">every word and its position, from the PDF's text layer</text>
-        <path class="a" d="M380,136 V158" marker-end="url(#pl-arr)"/>
+        <!-- 1 ingest -->
+        <rect class="box" x="190" y="72" width="380" height="58" rx="10"/>
+        <circle class="num" cx="214" cy="94" r="11"/><text class="num-t" x="214" y="98" text-anchor="middle">1</text>
+        <text class="t" x="380" y="96" text-anchor="middle">ingest</text>
+        <text class="s" x="380" y="117" text-anchor="middle">every word and its position, from the PDF's text layer</text>
+        <path class="a" d="M380,130 V148" marker-end="url(#pl-arr)"/>
       
-        <!-- propose -->
-        <rect class="box" x="200" y="160" width="360" height="56" rx="8"/>
-        <text class="t" x="380" y="183" text-anchor="middle">propose</text>
-        <text class="s" x="380" y="203" text-anchor="middle">MinerU suggests regions: paragraph, table, image</text>
-        <path class="a" d="M380,216 V238" marker-end="url(#pl-arr)"/>
+        <!-- 2 propose -->
+        <rect class="box" x="190" y="150" width="380" height="58" rx="10"/>
+        <circle class="num" cx="214" cy="172" r="11"/><text class="num-t" x="214" y="176" text-anchor="middle">2</text>
+        <text class="t" x="380" y="174" text-anchor="middle">propose</text>
+        <text class="s" x="380" y="195" text-anchor="middle">MinerU suggests regions: paragraph, table, image</text>
+        <path class="a" d="M380,208 V226" marker-end="url(#pl-arr)"/>
       
-        <!-- cover -->
-        <rect class="box" x="200" y="240" width="360" height="70" rx="8"/>
-        <text class="t" x="380" y="263" text-anchor="middle">cover</text>
-        <text class="s" x="380" y="283" text-anchor="middle">every word is claimed by exactly one region;</text>
-        <text class="s" x="380" y="300" text-anchor="middle">leftover words become their own region</text>
+        <!-- 3 cover -->
+        <rect class="box" x="190" y="228" width="380" height="72" rx="10"/>
+        <circle class="num" cx="214" cy="250" r="11"/><text class="num-t" x="214" y="254" text-anchor="middle">3</text>
+        <text class="t" x="380" y="252" text-anchor="middle">cover</text>
+        <text class="s" x="380" y="273" text-anchor="middle">every word is claimed by exactly one region;</text>
+        <text class="s" x="380" y="290" text-anchor="middle">leftover words become their own region</text>
       
         <!-- split -->
-        <path class="a" d="M380,310 V330 H185 V358" marker-end="url(#pl-arr)"/>
-        <path class="a table" d="M380,330 H565 V358" marker-end="url(#pl-arr-t)"/>
+        <path class="a" d="M380,300 V318 H180 V368" marker-end="url(#pl-arr)"/>
+        <path class="a table" d="M380,318 H560 V368" marker-end="url(#pl-arr-t)"/>
       
-        <!-- prose lane -->
-        <rect class="box" x="40" y="360" width="290" height="80" rx="8"/>
-        <text class="t" x="185" y="385" text-anchor="middle">prose</text>
-        <text class="s" x="185" y="406" text-anchor="middle">copied word for word from the PDF</text>
-        <text class="s" x="185" y="424" text-anchor="middle">no model involved</text>
-        <path class="a" d="M185,440 V708" marker-end="url(#pl-arr)"/>
+        <!-- lanes -->
+        <rect class="lane-bg" x="24" y="336" width="312" height="366" rx="14"/>
+        <text class="lane-label" x="44" y="357">PROSE PATH</text>
+        <rect class="lane-bg table" x="384" y="336" width="352" height="366" rx="14"/>
+        <text class="lane-label table" x="404" y="357">TABLE PATH</text><text class="lane-label table" x="716" y="357" text-anchor="end">EACH TABLE IN PARALLEL</text>
       
-        <!-- table lane -->
-        <rect class="box table" x="410" y="360" width="310" height="70" rx="8"/>
-        <text class="t" x="565" y="383" text-anchor="middle">read (each table, in parallel)</text>
-        <text class="s" x="565" y="403" text-anchor="middle">render the table region;</text>
-        <text class="s" x="565" y="420" text-anchor="middle">a vision model transcribes it</text>
-        <path class="a table" d="M565,430 V453" marker-end="url(#pl-arr-t)"/>
+        <!-- prose -->
+        <rect class="box" x="44" y="370" width="272" height="80" rx="10"/>
+        <text class="t" x="180" y="396" text-anchor="middle">copied as-is</text>
+        <text class="s" x="180" y="417" text-anchor="middle">word for word from the PDF</text>
+        <text class="s" x="180" y="435" text-anchor="middle">no model involved</text>
+        <path class="a" d="M180,450 V718" marker-end="url(#pl-arr)"/>
       
-        <rect class="box table" x="410" y="455" width="310" height="70" rx="8"/>
-        <text class="t" x="565" y="478" text-anchor="middle">anchor</text>
-        <text class="s" x="565" y="498" text-anchor="middle">check every cell against</text>
-        <text class="s" x="565" y="515" text-anchor="middle">the words printed on the page</text>
-        <path class="a table" d="M565,525 V548" marker-end="url(#pl-arr-t)"/>
+        <!-- 4 read -->
+        <rect class="box table" x="404" y="370" width="312" height="70" rx="10"/>
+        <circle class="num table" cx="428" cy="392" r="11"/><text class="num-t" x="428" y="396" text-anchor="middle">4</text>
+        <text class="t" x="560" y="394" text-anchor="middle">read</text>
+        <text class="s" x="560" y="414" text-anchor="middle">render the table region;</text>
+        <text class="s" x="560" y="431" text-anchor="middle">a vision model transcribes it</text>
+        <path class="a table" d="M560,440 V458" marker-end="url(#pl-arr-t)"/>
       
-        <rect class="box table" x="410" y="550" width="310" height="130" rx="8"/>
-        <circle class="ok" cx="430" cy="577" r="5"/>
-        <text class="s fg" x="444" y="581">match → cell kept</text>
-        <circle class="bad" cx="430" cy="603" r="5"/>
-        <text class="s fg" x="444" y="607">number doesn't match → re-read, keep better</text>
-        <circle class="bad" cx="430" cy="629" r="5"/>
-        <text class="s fg" x="444" y="633">number still unmatched → flagged, empty</text>
-        <circle class="bad" cx="430" cy="655" r="5"/>
-        <text class="s fg" x="444" y="659">read fails → table becomes prose</text>
-        <path class="a table" d="M565,680 V708" marker-end="url(#pl-arr-t)"/>
+        <!-- 5 anchor -->
+        <rect class="box table" x="404" y="460" width="312" height="70" rx="10"/>
+        <circle class="num table" cx="428" cy="482" r="11"/><text class="num-t" x="428" y="486" text-anchor="middle">5</text>
+        <text class="t" x="560" y="484" text-anchor="middle">anchor</text>
+        <text class="s" x="560" y="504" text-anchor="middle">check every cell against</text>
+        <text class="s" x="560" y="521" text-anchor="middle">the words printed on the page</text>
+        <path class="a table" d="M560,530 V548" marker-end="url(#pl-arr-t)"/>
+      
+        <!-- outcomes -->
+        <rect class="box table" x="404" y="550" width="312" height="132" rx="10"/>
+        <circle class="badge ok" cx="426" cy="576" r="9"/><text class="badge-t" x="426" y="580" text-anchor="middle">✓</text>
+        <text class="s fg" x="444" y="580">match → cell kept</text>
+        <circle class="badge warn" cx="426" cy="603" r="9"/><text class="badge-t" x="426" y="607" text-anchor="middle">↻</text>
+        <text class="s fg" x="444" y="607">number doesn't match → re-read once</text>
+        <circle class="badge bad" cx="426" cy="630" r="9"/><text class="badge-t" x="426" y="634" text-anchor="middle">!</text>
+        <text class="s fg" x="444" y="634">still no match → flagged, left empty</text>
+        <circle class="badge muted" cx="426" cy="657" r="9"/><text class="badge-t" x="426" y="661" text-anchor="middle">↩</text>
+        <text class="s fg" x="444" y="661">read fails → table becomes prose</text>
+        <path class="a table" d="M560,682 V718" marker-end="url(#pl-arr-t)"/>
       
         <!-- fallback -->
-        <path class="a table dash" d="M410,655 H193" marker-end="url(#pl-arr-t)"/>
-        <text class="s" x="300" y="646" text-anchor="middle">fallback</text>
+        <path class="a table dash" d="M404,657 H188" marker-end="url(#pl-arr-t)"/>
+        <text class="s accent" x="296" y="648" text-anchor="middle">fallback</text>
       
-        <!-- compose -->
-        <rect class="box" x="140" y="710" width="480" height="56" rx="8"/>
-        <text class="t" x="380" y="733" text-anchor="middle">compose</text>
-        <text class="s" x="380" y="753" text-anchor="middle">join tables split across pages · carry headers over</text>
-        <path class="a" d="M380,766 V788" marker-end="url(#pl-arr)"/>
+        <!-- 6 compose -->
+        <rect class="box" x="140" y="720" width="480" height="58" rx="10"/>
+        <circle class="num" cx="164" cy="742" r="11"/><text class="num-t" x="164" y="746" text-anchor="middle">6</text>
+        <text class="t" x="380" y="744" text-anchor="middle">compose</text>
+        <text class="s" x="380" y="765" text-anchor="middle">join tables split across pages · carry headers over</text>
+        <path class="a" d="M380,778 V796" marker-end="url(#pl-arr)"/>
       
-        <!-- emit -->
-        <rect class="box" x="140" y="790" width="480" height="74" rx="8"/>
-        <text class="t" x="380" y="813" text-anchor="middle">emit</text>
-        <text class="s" x="380" y="833" text-anchor="middle">tables.json · doc.json · images.json · markdown</text>
-        <text class="s accent" x="380" y="852" text-anchor="middle">+ a flag for everything that didn't verify</text>
+        <!-- 7 emit -->
+        <rect class="box" x="140" y="798" width="480" height="96" rx="10"/>
+        <circle class="num" cx="164" cy="820" r="11"/><text class="num-t" x="164" y="824" text-anchor="middle">7</text>
+        <text class="t" x="380" y="822" text-anchor="middle">emit</text>
+        <rect class="chip" x="188" y="836" width="99" height="24" rx="6"/><text class="mono" x="237.5" y="852" text-anchor="middle">tables.json</text>
+        <rect class="chip" x="297" y="836" width="78" height="24" rx="6"/><text class="mono" x="336" y="852" text-anchor="middle">doc.json</text>
+        <rect class="chip" x="385" y="836" width="99" height="24" rx="6"/><text class="mono" x="434.5" y="852" text-anchor="middle">images.json</text>
+        <rect class="chip" x="494" y="836" width="78" height="24" rx="6"/><text class="mono" x="533" y="852" text-anchor="middle">markdown</text>
+        <text class="s accent" x="380" y="881" text-anchor="middle">+ a flag for everything that didn't verify</text>
       </svg>
       <figcaption>How bebop turns a PDF into data. Only tables go to a model, and every cell it reads is checked against the page.</figcaption>
     </figure>
-    <div class="ph hero">📷 Your diagram: one table cell checked against the words on the page, and flagged when they don't match</div>
+    <figure class="hero pipeline-wrap">
+      <svg class="pipeline anchor" viewBox="0 0 760 350" role="img" aria-labelledby="an-title an-desc" xmlns="http://www.w3.org/2000/svg">
+        <title id="an-title">How bebop checks a table cell</title>
+        <desc id="an-desc">The page says NOI 4,410. The model misreads it as 4,401. Because 4,401 does not appear among the words printed in that table, the cell is left empty and flagged instead of shipping a wrong number, and the page's own 4,410 goes on the table's unclaimed list. Revenue 1,234 and Expenses (5,678) match the page and are kept.</desc>
+        <defs><marker id="an-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="m" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+        <circle class="num" cx="32" cy="22" r="11"/><text class="num-t" x="32" y="26" text-anchor="middle">1</text>
+        <text class="t" x="50" y="27">On the page</text>
+        <rect class="box" x="20" y="46" width="220" height="120" rx="8"/>
+        <path class="rule" d="M20,86 H240"/>
+        <path class="rule" d="M20,126 H240"/>
+        <path class="rule" d="M130,46 V166"/>
+        <text class="mono" x="32" y="71">Revenue</text>
+        <text class="mono" x="226" y="71" text-anchor="end">1,234</text>
+        <text class="mono" x="32" y="111">Expenses</text>
+        <text class="mono" x="226" y="111" text-anchor="end">(5,678)</text>
+        <text class="mono" x="32" y="151">NOI</text>
+        <text class="mono" x="226" y="151" text-anchor="end">4,410</text>
+        <circle class="num" cx="282" cy="22" r="11"/><text class="num-t" x="282" y="26" text-anchor="middle">2</text>
+        <text class="t" x="300" y="27">What the model read</text>
+        <rect class="box" x="270" y="46" width="220" height="120" rx="8"/>
+        <path class="rule" d="M270,86 H490"/>
+        <path class="rule" d="M270,126 H490"/>
+        <path class="rule" d="M380,46 V166"/>
+        <text class="mono" x="282" y="71">Revenue</text>
+        <text class="mono" x="476" y="71" text-anchor="end">1,234</text>
+        <text class="mono" x="282" y="111">Expenses</text>
+        <text class="mono" x="476" y="111" text-anchor="end">(5,678)</text>
+        <text class="mono" x="282" y="151">NOI</text>
+        <text class="mono accent" x="476" y="151" text-anchor="end">4,401</text>
+        <circle class="num table" cx="532" cy="22" r="11"/><text class="num-t" x="532" y="26" text-anchor="middle">3</text>
+        <text class="t" x="550" y="27">After the check</text>
+        <rect class="box table" x="520" y="46" width="220" height="120" rx="8"/>
+        <path class="rule" d="M520,86 H740"/>
+        <path class="rule" d="M520,126 H740"/>
+        <path class="rule" d="M630,46 V166"/>
+        <text class="mono" x="532" y="71">Revenue</text>
+        <text class="mono" x="698" y="71" text-anchor="end">1,234</text>
+        <circle class="badge ok" cx="720" cy="67" r="8"/><text class="badge-t" x="720" y="71" text-anchor="middle">✓</text>
+        <text class="mono" x="532" y="111">Expenses</text>
+        <text class="mono" x="698" y="111" text-anchor="end">(5,678)</text>
+        <circle class="badge ok" cx="720" cy="107" r="8"/><text class="badge-t" x="720" y="111" text-anchor="middle">✓</text>
+        <text class="mono" x="532" y="151">NOI</text>
+        <rect class="empty" x="638" y="134" width="70" height="24" rx="4"/>
+        <text class="s" x="673" y="151" text-anchor="middle">empty</text>
+        <circle class="badge bad" cx="720" cy="147" r="8"/><text class="badge-t" x="720" y="151" text-anchor="middle">!</text>
+        <path class="a" d="M242,106 H266" marker-end="url(#an-arr)"/>
+        <path class="a" d="M492,106 H516" marker-end="url(#an-arr)"/>
+        <text class="s" x="130" y="190" text-anchor="middle">the words actually printed</text>
+        <text class="s" x="130" y="207" text-anchor="middle">in this table on the page</text>
+        <text class="s" x="380" y="190" text-anchor="middle">one digit swapped:</text>
+        <text class="s" x="380" y="207" text-anchor="middle">4,410 read as 4,401</text>
+        <text class="s" x="630" y="190" text-anchor="middle">4,401 isn't on the page,</text>
+        <text class="s" x="630" y="207" text-anchor="middle">so it's flagged, never shipped</text>
+        <rect class="lane-bg table" x="20" y="232" width="720" height="104" rx="12"/>
+        <circle class="badge ok" cx="44" cy="260" r="9"/><text class="badge-t" x="44" y="264" text-anchor="middle">✓</text>
+        <text class="s fg" x="62" y="264">A kept cell is linked to the exact words on the page it came from.</text>
+        <circle class="badge warn" cx="44" cy="286" r="9"/><text class="badge-t" x="44" y="290" text-anchor="middle">↻</text>
+        <text class="s fg" x="62" y="290">A number that doesn't match gets one fresh read first; the better read is kept.</text>
+        <circle class="badge bad" cx="44" cy="312" r="9"/><text class="badge-t" x="44" y="316" text-anchor="middle">!</text>
+        <text class="s fg" x="62" y="316">If it still doesn't match, the page's own “4,410” goes on the table's unclaimed list — nothing disappears.</text>
+      </svg>
+      <figcaption>The anchor check on one small, made-up table: a misread number is flagged instead of shipped.</figcaption>
+    </figure>
   </div>
 
   <h2>What it is</h2>

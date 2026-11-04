@@ -104,20 +104,35 @@ footer { padding: 32px 0 64px; border-top: 1px solid var(--line); color: var(--m
 @media (min-width: 720px) { .videos { grid-template-columns: 3fr 1fr; } }
 .videos video { width: 100%; border-radius: 6px; background: #000; }
 
-/* bebop pipeline diagram */
+/* bebop diagrams */
 .pipeline-wrap { margin: 0; overflow-x: auto; }
 .pipeline { display: block; width: 100%; min-width: 560px; max-width: 760px; height: auto; margin: 0 auto; }
 .pipeline-wrap figcaption { text-align: center; color: var(--muted); font-size: 0.95rem; margin-top: 8px; }
 .pipeline .box { fill: var(--card); stroke: var(--line); stroke-width: 1.5; }
 .pipeline .box.table { stroke: var(--accent); }
+.pipeline .lane-bg { fill: var(--fg); fill-opacity: 0.035; }
+.pipeline .lane-bg.table { fill: var(--accent); fill-opacity: 0.07; }
+.pipeline .lane-label { fill: var(--muted); font: 700 11px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: 0.08em; }
+.pipeline .lane-label.table { fill: var(--accent); }
 .pipeline .t { fill: var(--fg); font: 600 15px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 .pipeline .s { fill: var(--muted); font: 12.5px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
 .pipeline .s.fg { fill: var(--fg); }
-.pipeline .s.accent { fill: var(--accent); }
+.pipeline .s.accent, .pipeline .mono.accent { fill: var(--accent); }
+.pipeline .mono { fill: var(--fg); font: 12.5px ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
 .pipeline .a { stroke: var(--muted); stroke-width: 1.5; fill: none; }
 .pipeline .a.table { stroke: var(--accent); }
 .pipeline .a.dash { stroke-dasharray: 5 4; }
+.pipeline .rule { stroke: var(--line); stroke-width: 1; }
 .pipeline .m { fill: var(--muted); }
 .pipeline .m.table { fill: var(--accent); }
-.pipeline .ok { fill: #16a34a; }
-.pipeline .bad { fill: var(--accent); }
+.pipeline .num { fill: var(--muted); }
+.pipeline .num.table { fill: var(--accent); }
+.pipeline .num-t { fill: var(--card); font: 700 11px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.pipeline .chip { fill: var(--bg); stroke: var(--line); }
+.pipeline .chip.strong { stroke: var(--fg); stroke-width: 1.5; }
+.pipeline .badge.ok { fill: #16a34a; }
+.pipeline .badge.warn { fill: #d97706; }
+.pipeline .badge.bad { fill: var(--accent); }
+.pipeline .badge.muted { fill: var(--muted); }
+.pipeline .badge-t { fill: #fff; font: 700 11px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+.pipeline .empty { fill: none; stroke: var(--accent); stroke-dasharray: 4 3; }
