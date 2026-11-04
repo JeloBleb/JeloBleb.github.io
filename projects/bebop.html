@@ -21,7 +21,91 @@
 
   <h2>How it works</h2>
   <div class="gallery">
-    <div class="ph hero">📷 Your diagram: the pipeline (PDF → ingest → propose → cover → read → compose → emit → outputs)</div>
+    <figure class="hero pipeline-wrap">
+      <svg class="pipeline" viewBox="0 0 760 880" role="img" aria-labelledby="pl-title pl-desc" xmlns="http://www.w3.org/2000/svg">
+        <title id="pl-title">How bebop turns a PDF into data</title>
+        <desc id="pl-desc">A PDF goes through ingest, propose and cover. Then prose is copied straight from the PDF's text, while each table is read by a vision model and every cell is checked against the words on the page. Numbers that don't match get one re-read; anything still unmatched is flagged and left empty; a failed read falls back to prose. Compose joins tables across pages, and emit writes the four outputs plus flags.</desc>
+        <defs>
+          <marker id="pl-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m" d="M0,0 L10,5 L0,10 z"/></marker>
+          <marker id="pl-arr-t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="m table" d="M0,0 L10,5 L0,10 z"/></marker>
+        </defs>
+      
+        <!-- PDF -->
+        <rect class="box pill" x="320" y="16" width="120" height="36" rx="18"/>
+        <text class="t" x="380" y="39" text-anchor="middle">PDF</text>
+        <path class="a" d="M380,52 V78" marker-end="url(#pl-arr)"/>
+      
+        <!-- ingest -->
+        <rect class="box" x="200" y="80" width="360" height="56" rx="8"/>
+        <text class="t" x="380" y="103" text-anchor="middle">ingest</text>
+        <text class="s" x="380" y="123" text-anchor="middle">every word and its position, from the PDF's text layer</text>
+        <path class="a" d="M380,136 V158" marker-end="url(#pl-arr)"/>
+      
+        <!-- propose -->
+        <rect class="box" x="200" y="160" width="360" height="56" rx="8"/>
+        <text class="t" x="380" y="183" text-anchor="middle">propose</text>
+        <text class="s" x="380" y="203" text-anchor="middle">MinerU suggests regions: paragraph, table, image</text>
+        <path class="a" d="M380,216 V238" marker-end="url(#pl-arr)"/>
+      
+        <!-- cover -->
+        <rect class="box" x="200" y="240" width="360" height="70" rx="8"/>
+        <text class="t" x="380" y="263" text-anchor="middle">cover</text>
+        <text class="s" x="380" y="283" text-anchor="middle">every word is claimed by exactly one region;</text>
+        <text class="s" x="380" y="300" text-anchor="middle">leftover words become their own region</text>
+      
+        <!-- split -->
+        <path class="a" d="M380,310 V330 H185 V358" marker-end="url(#pl-arr)"/>
+        <path class="a table" d="M380,330 H565 V358" marker-end="url(#pl-arr-t)"/>
+      
+        <!-- prose lane -->
+        <rect class="box" x="40" y="360" width="290" height="80" rx="8"/>
+        <text class="t" x="185" y="385" text-anchor="middle">prose</text>
+        <text class="s" x="185" y="406" text-anchor="middle">copied word for word from the PDF</text>
+        <text class="s" x="185" y="424" text-anchor="middle">no model involved</text>
+        <path class="a" d="M185,440 V708" marker-end="url(#pl-arr)"/>
+      
+        <!-- table lane -->
+        <rect class="box table" x="410" y="360" width="310" height="70" rx="8"/>
+        <text class="t" x="565" y="383" text-anchor="middle">read (each table, in parallel)</text>
+        <text class="s" x="565" y="403" text-anchor="middle">render the table region;</text>
+        <text class="s" x="565" y="420" text-anchor="middle">a vision model transcribes it</text>
+        <path class="a table" d="M565,430 V453" marker-end="url(#pl-arr-t)"/>
+      
+        <rect class="box table" x="410" y="455" width="310" height="70" rx="8"/>
+        <text class="t" x="565" y="478" text-anchor="middle">anchor</text>
+        <text class="s" x="565" y="498" text-anchor="middle">check every cell against</text>
+        <text class="s" x="565" y="515" text-anchor="middle">the words printed on the page</text>
+        <path class="a table" d="M565,525 V548" marker-end="url(#pl-arr-t)"/>
+      
+        <rect class="box table" x="410" y="550" width="310" height="130" rx="8"/>
+        <circle class="ok" cx="430" cy="577" r="5"/>
+        <text class="s fg" x="444" y="581">match → cell kept</text>
+        <circle class="bad" cx="430" cy="603" r="5"/>
+        <text class="s fg" x="444" y="607">number doesn't match → re-read, keep better</text>
+        <circle class="bad" cx="430" cy="629" r="5"/>
+        <text class="s fg" x="444" y="633">number still unmatched → flagged, empty</text>
+        <circle class="bad" cx="430" cy="655" r="5"/>
+        <text class="s fg" x="444" y="659">read fails → table becomes prose</text>
+        <path class="a table" d="M565,680 V708" marker-end="url(#pl-arr-t)"/>
+      
+        <!-- fallback -->
+        <path class="a table dash" d="M410,655 H193" marker-end="url(#pl-arr-t)"/>
+        <text class="s" x="300" y="646" text-anchor="middle">fallback</text>
+      
+        <!-- compose -->
+        <rect class="box" x="140" y="710" width="480" height="56" rx="8"/>
+        <text class="t" x="380" y="733" text-anchor="middle">compose</text>
+        <text class="s" x="380" y="753" text-anchor="middle">join tables split across pages · carry headers over</text>
+        <path class="a" d="M380,766 V788" marker-end="url(#pl-arr)"/>
+      
+        <!-- emit -->
+        <rect class="box" x="140" y="790" width="480" height="74" rx="8"/>
+        <text class="t" x="380" y="813" text-anchor="middle">emit</text>
+        <text class="s" x="380" y="833" text-anchor="middle">tables.json · doc.json · images.json · markdown</text>
+        <text class="s accent" x="380" y="852" text-anchor="middle">+ a flag for everything that didn't verify</text>
+      </svg>
+      <figcaption>How bebop turns a PDF into data. Only tables go to a model, and every cell it reads is checked against the page.</figcaption>
+    </figure>
     <div class="ph hero">📷 Your diagram: one table cell checked against the words on the page, and flagged when they don't match</div>
   </div>
 
