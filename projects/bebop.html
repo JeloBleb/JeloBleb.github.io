@@ -101,7 +101,7 @@
         <circle class="badge warn" cx="426" cy="603" r="9"/><text class="badge-t" x="426" y="607" text-anchor="middle">↻</text>
         <text class="s fg" x="444" y="607">number doesn't match → re-read once</text>
         <circle class="badge bad" cx="426" cy="630" r="9"/><text class="badge-t" x="426" y="634" text-anchor="middle">!</text>
-        <text class="s fg" x="444" y="634">still no match → flagged, left empty</text>
+        <text class="s fg" x="444" y="634">still no match → flagged, page value kept</text>
         <circle class="badge muted" cx="426" cy="657" r="9"/><text class="badge-t" x="426" y="661" text-anchor="middle">↩</text>
         <text class="s fg" x="444" y="661">read fails → table becomes prose</text>
         <path class="a table" d="M560,682 V718" marker-end="url(#pl-arr-t)"/>
@@ -131,8 +131,8 @@
     </figure>
     <figure class="hero pipeline-wrap">
       <svg class="pipeline anchor" viewBox="0 0 760 350" role="img" aria-labelledby="an-title an-desc" xmlns="http://www.w3.org/2000/svg">
-        <title id="an-title">How bebop checks a table cell</title>
-        <desc id="an-desc">The page says NOI 4,410. The model misreads it as 4,401. Because 4,401 does not appear among the words printed in that table, the cell is left empty and flagged instead of shipping a wrong number, and the page's own 4,410 goes on the table's unclaimed list. Revenue 1,234 and Expenses (5,678) match the page and are kept.</desc>
+        <title id="an-title">How bebop catches a misread number</title>
+        <desc id="an-desc">The page says NOI 4,410. The first read gets it wrong as 4,401. That number is not among the words printed in the table, so the check catches it and bebop reads the table again. The fresh read says 4,410, which matches the page, so it ships. If a number still does not match, it is flagged for review and the page's own value stays in the output.</desc>
         <defs><marker id="an-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="m" d="M0,0 L10,5 L0,10 z"/></marker></defs>
         <circle class="num" cx="32" cy="22" r="11"/><text class="num-t" x="32" y="26" text-anchor="middle">1</text>
         <text class="t" x="50" y="27">On the page</text>
@@ -146,20 +146,23 @@
         <text class="mono" x="226" y="111" text-anchor="end">(5,678)</text>
         <text class="mono" x="32" y="151">NOI</text>
         <text class="mono" x="226" y="151" text-anchor="end">4,410</text>
-        <circle class="num" cx="282" cy="22" r="11"/><text class="num-t" x="282" y="26" text-anchor="middle">2</text>
-        <text class="t" x="300" y="27">What the model read</text>
-        <rect class="box" x="270" y="46" width="220" height="120" rx="8"/>
+        <circle class="num table" cx="282" cy="22" r="11"/><text class="num-t" x="282" y="26" text-anchor="middle">2</text>
+        <text class="t" x="300" y="27">First read</text>
+        <rect class="box table" x="270" y="46" width="220" height="120" rx="8"/>
         <path class="rule" d="M270,86 H490"/>
         <path class="rule" d="M270,126 H490"/>
         <path class="rule" d="M380,46 V166"/>
         <text class="mono" x="282" y="71">Revenue</text>
-        <text class="mono" x="476" y="71" text-anchor="end">1,234</text>
+        <text class="mono" x="448" y="71" text-anchor="end">1,234</text>
+        <circle class="badge ok" cx="470" cy="67" r="8"/><text class="badge-t" x="470" y="71" text-anchor="middle">✓</text>
         <text class="mono" x="282" y="111">Expenses</text>
-        <text class="mono" x="476" y="111" text-anchor="end">(5,678)</text>
+        <text class="mono" x="448" y="111" text-anchor="end">(5,678)</text>
+        <circle class="badge ok" cx="470" cy="107" r="8"/><text class="badge-t" x="470" y="111" text-anchor="middle">✓</text>
         <text class="mono" x="282" y="151">NOI</text>
-        <text class="mono accent" x="476" y="151" text-anchor="end">4,401</text>
+        <text class="mono accent" x="448" y="151" text-anchor="end">4,401</text>
+        <circle class="badge bad" cx="470" cy="147" r="8"/><text class="badge-t" x="470" y="151" text-anchor="middle">!</text>
         <circle class="num table" cx="532" cy="22" r="11"/><text class="num-t" x="532" y="26" text-anchor="middle">3</text>
-        <text class="t" x="550" y="27">After the check</text>
+        <text class="t" x="550" y="27">After a fresh read</text>
         <rect class="box table" x="520" y="46" width="220" height="120" rx="8"/>
         <path class="rule" d="M520,86 H740"/>
         <path class="rule" d="M520,126 H740"/>
@@ -171,26 +174,25 @@
         <text class="mono" x="698" y="111" text-anchor="end">(5,678)</text>
         <circle class="badge ok" cx="720" cy="107" r="8"/><text class="badge-t" x="720" y="111" text-anchor="middle">✓</text>
         <text class="mono" x="532" y="151">NOI</text>
-        <rect class="empty" x="638" y="134" width="70" height="24" rx="4"/>
-        <text class="s" x="673" y="151" text-anchor="middle">empty</text>
-        <circle class="badge bad" cx="720" cy="147" r="8"/><text class="badge-t" x="720" y="151" text-anchor="middle">!</text>
+        <text class="mono" x="698" y="151" text-anchor="end">4,410</text>
+        <circle class="badge ok" cx="720" cy="147" r="8"/><text class="badge-t" x="720" y="151" text-anchor="middle">✓</text>
         <path class="a" d="M242,106 H266" marker-end="url(#an-arr)"/>
         <path class="a" d="M492,106 H516" marker-end="url(#an-arr)"/>
         <text class="s" x="130" y="190" text-anchor="middle">the words actually printed</text>
         <text class="s" x="130" y="207" text-anchor="middle">in this table on the page</text>
-        <text class="s" x="380" y="190" text-anchor="middle">one digit swapped:</text>
-        <text class="s" x="380" y="207" text-anchor="middle">4,410 read as 4,401</text>
-        <text class="s" x="630" y="190" text-anchor="middle">4,401 isn't on the page,</text>
-        <text class="s" x="630" y="207" text-anchor="middle">so it's flagged, never shipped</text>
+        <text class="s" x="380" y="190" text-anchor="middle">4,401 isn't on the page,</text>
+        <text class="s" x="380" y="207" text-anchor="middle">so the check catches it</text>
+        <text class="s" x="630" y="190" text-anchor="middle">the fresh read matches the page,</text>
+        <text class="s" x="630" y="207" text-anchor="middle">so the number ships</text>
         <rect class="lane-bg table" x="20" y="232" width="720" height="104" rx="12"/>
         <circle class="badge ok" cx="44" cy="260" r="9"/><text class="badge-t" x="44" y="264" text-anchor="middle">✓</text>
-        <text class="s fg" x="62" y="264">A kept cell is linked to the exact words on the page it came from.</text>
+        <text class="s fg" x="62" y="264">Every kept cell is linked to the exact words on the page it came from.</text>
         <circle class="badge warn" cx="44" cy="286" r="9"/><text class="badge-t" x="44" y="290" text-anchor="middle">↻</text>
-        <text class="s fg" x="62" y="290">A number that doesn't match gets one fresh read first; the better read is kept.</text>
+        <text class="s fg" x="62" y="290">A number that doesn't match gets one fresh read, and the better read is kept.</text>
         <circle class="badge bad" cx="44" cy="312" r="9"/><text class="badge-t" x="44" y="316" text-anchor="middle">!</text>
-        <text class="s fg" x="62" y="316">If it still doesn't match, the page's own “4,410” goes on the table's unclaimed list — nothing disappears.</text>
+        <text class="s fg" x="62" y="316">If it still doesn't match, it's flagged for review, and the page's own 4,410 stays in the output.</text>
       </svg>
-      <figcaption>The anchor check on one small, made-up table: a misread number is flagged instead of shipped.</figcaption>
+      <figcaption>The anchor check on one small, made-up table: a misread number gets caught and read again before anything ships.</figcaption>
     </figure>
   </div>
 
@@ -228,7 +230,7 @@
       </tbody>
     </table>
   </div>
-  <p>Docling also silently dropped 141 values in that comparison.</p>
+  <p>Docling also silently dropped 141 values in that comparison. Later, adding table joins across pages raised bebop's association to 97.7%, with value recall still at 100%. Reducto and Docling were not retested.</p>
 
   <p class="project-para"><span class="todo">✏️ your paragraph about this project</span></p>
 
