@@ -172,3 +172,10 @@ img.zoomable:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
 .lightbox::backdrop { background: rgba(0, 0, 0, 0.85); }
 .lightbox img { display: block; max-width: 95vw; max-height: 95vh; width: auto; height: auto; border-radius: 4px; background: #fff; }
 .process video { display: block; width: 100%; height: auto; aspect-ratio: var(--ar); object-fit: contain; border-radius: 6px; background: #000; }
+
+/* keyboards: tall photo spanning both rows */
+@media (min-width: 720px) {
+  .process.two-col { display: grid; grid-template-columns: 1.29fr 1fr; align-items: start; }
+  .process.two-col .hero { grid-column: 1; }
+  .process.two-col .tall { grid-column: 2; grid-row: 1 / span 2; }
+}
