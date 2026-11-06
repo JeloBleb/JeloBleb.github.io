@@ -164,3 +164,10 @@ footer { padding: 32px 0 64px; border-top: 1px solid var(--line); color: var(--m
 .videos figure { margin: 0; }
 .videos figcaption { font-size: 0.92rem; color: var(--muted); margin-top: 6px; }
 .project-para { margin-top: 24px; }
+
+/* click-to-enlarge */
+img.zoomable { cursor: zoom-in; }
+img.zoomable:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lightbox { border: 0; padding: 0; margin: auto; background: transparent; max-width: 100vw; max-height: 100vh; overflow: hidden; cursor: zoom-out; }
+.lightbox::backdrop { background: rgba(0, 0, 0, 0.85); }
+.lightbox img { display: block; max-width: 95vw; max-height: 95vh; width: auto; height: auto; border-radius: 4px; background: #fff; }
