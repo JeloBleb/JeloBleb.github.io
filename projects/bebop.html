@@ -12,6 +12,7 @@
 <article class="project">
   <header class="project-head">
     <h1>bebop</h1>
+    <p class="project-lede">A PDF parser that reads tables with a vision model and checks every cell against the page.</p>
   </header>
 
   <div class="gallery">
@@ -225,15 +226,15 @@
       <thead><tr><th></th><th>bebop</th><th>Reducto</th><th>Docling</th></tr></thead>
       <tbody>
         <tr><td>Value recall</td><td>100.00%</td><td>99.98%</td><td>97.19%</td></tr>
-        <tr><td>Association</td><td>97.7%</td><td>68.8%</td><td>66.1%</td></tr>
+        <tr><td>Association (values matched to the right headers)</td><td>97.7%</td><td>68.8%</td><td>66.1%</td></tr>
       </tbody>
     </table>
   </div>
 
-  <p class="project-para">Our client had strict requirements for his commercial real estate ETL pipeline (extracting data from offering memoranda to run financial models): no unknowingly dropped or invented data. We tried Docling and Reducto as parsers (open and closed solutions, respectively) but found that they silently dropped values and had poor association, often mixing data between headers or merging columns and rows.</p>
-  <p>I went through a few iterations of bebop, the first being a bare minimum prototype. The second was a complete rewrite and ended up being a disaster. It dropped most headers and turned prose into fake tables. I had just started "vibe coding" and had made up goals in my head on what felt right, and often blindly trusted my coding agent.</p>
-  <p>I rebuilt the third version after better understanding measurements and the lower level architecture of bebop. For example, I found that Claude was making per-instance, hardcoded patches, when I later found that the root cause was bebop not being able to join tables across pages of the PDF.</p>
-  <p>I could never have built bebop without AI and it taught me numerous things, chiefly that I cannot blindly trust it without having my own thorough understanding of my code.</p>
+  <p class="project-para">Our client had strict requirements for his commercial real estate ETL pipeline (extracting data from offering memoranda to run financial models): no unknowingly dropped or invented data. We tried Docling and Reducto as parsers (open and closed solutions, respectively) but found that they silently dropped values and had poor association, often mixing data between headers or merging columns and rows. I built bebop, a PDF parser that checks every table cell against the page.</p>
+  <p>I went through a few iterations of bebop, the first being a bare minimum prototype. The second was a rewrite and a disaster. It dropped most headers and turned prose into fake tables. I had just started "vibe coding" and had made up goals in my head on what felt right, and often blindly trusted my coding agent.</p>
+  <p>I rebuilt the third version after better understanding measurements and the lower level architecture. For example, I found that Claude was making per-instance, hardcoded patches, when the root cause was bebop not being able to join tables across pages.</p>
+  <p>I could never have built bebop without AI and it taught me that I cannot blindly trust it without my own thorough understanding of my code.</p>
 
   <h2>Links</h2>
   <ul class="links-list"><li><a href="https://github.com/JeloBleb/bebop">Source code on GitHub</a></li></ul>
