@@ -195,6 +195,32 @@
     </figure>
   </div>
 
+  <h2>Compared with Docling and plain Gemini</h2>
+  <p>I ran bebop and <a href="https://github.com/docling-project/docling">Docling</a> on pages 1–3 of the Federal Reserve H.8 release, which hold 897 numbers in dense tables, and scored both against the PDF's own text.</p>
+  <div class="ba-scroll">
+    <table class="ba-table compare">
+      <thead><tr><th></th><th>bebop</th><th>Docling</th></tr></thead>
+      <tbody>
+        <tr><td>Numbers found</td><td>897 / 897</td><td>861 / 897</td></tr>
+        <tr><td>Numbers in the correct row and column</td><td>897 / 897</td><td>684 / 897</td></tr>
+        <tr><td>Rows entirely correct</td><td>68 / 68</td><td>33 / 68</td></tr>
+        <tr><td>Numbers not in the PDF</td><td>0</td><td>0</td></tr>
+        <tr><td>Time, 3 pages</td><td>about 90 seconds</td><td>about 5 seconds</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Neither tool invented a number. The gap is where numbers ended up. Docling squeezed neighboring columns into one cell, which shifted later values under the wrong header:</p>
+  <div class="ba-scroll">
+    <table class="ba-table">
+      <thead><tr><th>Row 1, Bank credit</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th></tr></thead>
+      <tbody>
+        <tr><td>On the page, and in bebop</td><td>8.3</td><td>6.7</td><td>-0.2</td><td>4.0</td></tr>
+        <tr><td>Docling</td><td>8.3</td><td>6.7 -0.2</td><td>4.0</td><td>5.3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>This is one public document, with Docling 2.148.0 on its default settings, so it shows a single case and not a general ranking. I did not run plain Gemini in this test. The difference there is in the design: bebop uses Gemini to read tables, then checks every cell against the page, records where each kept value sits on the page, and flags what it can't confirm. A plain model reply gives you the table with none of those checks, so finding a wrong number means comparing it to the PDF yourself.</p>
+
   <h2>What it is</h2>
   <p><span class="todo">✏️ one or two sentences</span></p>
 

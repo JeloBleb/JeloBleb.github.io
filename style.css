@@ -150,3 +150,4 @@ footer { padding: 32px 0 64px; border-top: 1px solid var(--line); color: var(--m
 .ba-table th:first-child, .ba-table td:first-child { text-align: left; }
 .ba-table tr:last-child td { border-bottom: 0; }
 .featured > * { min-width: 0; }
+.compare td:first-child { white-space: normal; min-width: 180px; }
