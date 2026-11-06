@@ -15,7 +15,7 @@
     <p class="meta">January–April 2026</p>
   </header>
 
-  <p>A Rust command-line tool that pulls hidden knowledge out of a repository's git history: who owns which files, which files change together, and which code has been abandoned. Output comes as a table, JSON, or CSV, so it can be fed straight into an LLM.</p>
+  <p>A Rust command-line tool that pulls ownership, coupling, and decay data out of a repository's git history.</p>
 
   <h2>Running it on ripgrep</h2>
   <figure class="term-fig">
@@ -25,7 +25,7 @@
 +---------+-------+--------------+---------+
 | 2303    | 226   | 5643         | 492     |
 +---------+-------+--------------+---------+</code></pre>
-    <figcaption>Real output from the <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> repository, read in under a second.</figcaption>
+    <figcaption>Output from the <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> repository.</figcaption>
   </figure>
   <figure class="term-fig">
     <pre class="term"><code>$ gitarch --top 7 coupling
@@ -40,7 +40,7 @@
 | CHANGELOG.md and crates/core/flags/complete/fish.rs     | 60%      |
 | Cargo.lock and Cargo.toml                               | 60%      |
 +---------------------------------------------------------+----------+</code></pre>
-    <figcaption>Coupling: files that tend to change together, which shows what else to check before touching a file.</figcaption>
+    <figcaption>Files that tend to change together.</figcaption>
   </figure>
 
   <p class="project-para">This was my first real coding project. I had just finished the Rust Book, the official guide to the language, and immediately fell in love with it. Rust was challenging to learn but very enjoyable, especially the functional programming aspects, which really messed with my object-oriented experience (some C++ in Unreal Engine doing game development, and Java from teaching myself the AP CSA course). A CLI tool was a good scope for a first project, and I was inspired by other CLI tools that had been rewritten in Rust, like ripgrep and fd (replacements for grep and find). The premise of gitarch is basically pure functions reading git history, so it leaned heavily on iterators and other functional features, and overall I felt Rust allowed for some very elegant solutions. All of the code is handwritten, and I finished it in a few months. It is far from a perfect project and not very technically difficult. I did have plans for async and multithreading, but I moved on to other projects before implementing them.</p>
