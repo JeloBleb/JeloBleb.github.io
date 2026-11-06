@@ -233,7 +233,7 @@
 
   <p class="project-para">Our client had strict goals for data extraction from real estate PDFs. Bebop, as our pipeline's parser, had to meet these goals: no unknowingly dropped or invented data. We tried Docling and Reducto as parsers (open and closed solutions, respectively) but found that they silently dropped values and had poor association, often mixing data between headers or merging columns and rows.</p>
   <p>I went through a few iterations of bebop, the first being a bare minimum prototype. The second was a complete rewrite and ended up being a disaster. It dropped most headers and turned prose into fake tables. I had just started "vibe coding" and had made up goals in my head on what felt right, and often blindly trusted my coding agent.</p>
-  <p>I rebuilt the third version after better understanding measurements and the lower level architecture of bebop. For example, I found that Claude was making per-instance, hardcoded patches, when I found that the root cause was bebop not being able to join tables across pages of the PDF.</p>
+  <p>I rebuilt the third version after better understanding measurements and the lower level architecture of bebop. For example, I found that Claude was making per-instance, hardcoded patches, when I realized that the root cause was bebop not being able to join tables across pages of the PDF.</p>
   <p>I could never have built bebop without AI and it taught me numerous things, chiefly that I cannot blindly trust it without having my own thorough understanding of my code.</p>
 
   <h2>Links</h2>
