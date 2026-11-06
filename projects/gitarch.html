@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gitarch · Teemu Miller</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html">← All projects</a>
+<article class="project">
+  <header class="project-head">
+    <h1>gitarch</h1>
+    <p class="meta">January–April 2026</p>
+  </header>
+
+  <p>A Rust command-line tool that pulls hidden knowledge out of a repository's git history: who owns which files, which files change together, and which code has been abandoned. Output comes as a table, JSON, or CSV, so it can be fed straight into an LLM.</p>
+
+  <h2>Running it on ripgrep</h2>
+  <figure class="term-fig">
+    <pre class="term"><code>$ gitarch summary
++---------+-------+--------------+---------+
+| Commits | Files | File Changes | Authors |
++---------+-------+--------------+---------+
+| 2303    | 226   | 5643         | 492     |
++---------+-------+--------------+---------+</code></pre>
+    <figcaption>Real output from the <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> repository, read in under a second.</figcaption>
+  </figure>
+  <figure class="term-fig">
+    <pre class="term"><code>$ gitarch --top 7 coupling
++---------------------------------------------------------+----------+
+| File Pair                                               | Coupling |
++---------------------------------------------------------+----------+
+| .github/workflows/ci.yml and ci/ubuntu-install-packages | 83%      |
+| Cargo.lock and crates/globset/Cargo.toml                | 75%      |
+| tests/multiline.rs and tests/regression.rs              | 67%      |
+| CHANGELOG.md and tests/regression.rs                    | 66%      |
+| Cargo.lock and crates/ignore/Cargo.toml                 | 65%      |
+| CHANGELOG.md and crates/core/flags/complete/fish.rs     | 60%      |
+| Cargo.lock and Cargo.toml                               | 60%      |
++---------------------------------------------------------+----------+</code></pre>
+    <figcaption>Coupling: files that tend to change together, which shows what else to check before touching a file.</figcaption>
+  </figure>
+
+  <p class="project-para"><span class="todo">✏️ your paragraph about this project</span></p>
+
+  <h2>Links</h2>
+  <ul class="links-list"><li><a href="https://github.com/JeloBleb/gitarch">Source code on GitHub</a></li></ul>
+</article>
+
+<footer>
+  Teemu Miller · <a href="https://github.com/JeloBleb">GitHub</a> · <a href="mailto:teemu.miller@gmail.com">teemu.miller@gmail.com</a>
+</footer>
+</div>
+<script src="../lightbox.js" defer></script>
+</body>
+</html>

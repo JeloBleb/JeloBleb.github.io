@@ -182,3 +182,9 @@ img.zoomable:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
 }
 .videos figure { counter-increment: step; }
 .videos figcaption::before { content: counter(step) ". "; font-weight: 700; color: var(--accent); }
+
+/* terminal output */
+.term { margin: 0; padding: 12px 14px; overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--card); font: 12px/1.45 ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+.term-fig { margin: 0 0 16px; }
+.term-fig figcaption { font-size: 0.92rem; color: var(--muted); margin-top: 6px; }
+.featured.second { margin-top: 28px; }
