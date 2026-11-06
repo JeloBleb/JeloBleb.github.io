@@ -188,3 +188,4 @@ img.zoomable:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
 .term-fig { margin: 0 0 16px; }
 .term-fig figcaption { font-size: 0.92rem; color: var(--muted); margin-top: 6px; }
 .featured.second { margin-top: 28px; }
+.art-caption { margin: 0 0 12px; }
